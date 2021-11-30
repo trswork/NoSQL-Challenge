@@ -15,11 +15,13 @@ const ThoughtsSchema = new Schema({
         type: String,
         required: 'Username is Required'
     },
-    reactions: {
-        type: Array
-    }
+    reactions: [ReactionSchema],
 });
 
 const Thoughts = model('Thoughts', ThoughtsSchema);
 
-module.exports = Thoughts 
+ThoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+  });
+
+module.exports = Thoughts; 
