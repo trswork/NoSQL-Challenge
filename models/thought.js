@@ -13,10 +13,17 @@ const ThoughtsSchema = new Schema({
     },
     createdBy: {
         type: String,
-        required: 'Username is Required'
+        required: true
     },
     reactions: [ReactionSchema],
-});
+},
+{
+    toJSON: {
+      virtuals: true,
+    },
+    id: false
+  }
+  );
 
 const Thoughts = model('Thoughts', ThoughtsSchema);
 
@@ -37,12 +44,19 @@ const ReactionSchema = new Schema({
     },
     userName: {
         type: String,
-        required: 'Username is Required',
+        required: true
     },
     createdAt: {
         type: Date,
         default: Date.now
     },
-});
+},
+{
+    toJSON: {
+      virtuals: true,
+    },
+    id: false
+  }
+  );
 
 module.exports = Thoughts; 
